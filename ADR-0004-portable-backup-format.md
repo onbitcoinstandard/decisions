@@ -1,7 +1,7 @@
 # ADR-0004: Portable backup format — age with multi-recipient recovery paths
 
 Date: 2026-04-15
-Status: Accepted
+Status: Accepted — amended by ADR-0020: narrows this format to hot/identity keys and non-secret blueprints; cold seeds are physical-only per spec §5
 
 ## Context
 

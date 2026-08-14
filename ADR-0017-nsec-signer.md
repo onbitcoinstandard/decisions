@@ -1,7 +1,7 @@
 # ADR-0017: nsec signer sub-app (`nsec.onbitcoinstandard.com`)
 
 Date: 2026-04-16
-Status: Accepted
+Status: Accepted — amended by ADR-0022: embeds the bunker engine in the wallet as its identity layer; standalone nsec.onbitcoinstandard.com remains a power-user deployment
 
 ## Context
 

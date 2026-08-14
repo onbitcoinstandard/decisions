@@ -1,7 +1,7 @@
 # ADR-0008: Key unlock model — age-encrypted file primary, OS keystore optional
 
 Date: 2026-04-15
-Status: Accepted (amends ADR-0002 §2)
+Status: Accepted (amends ADR-0002 §2) — amended by ADR-0020: limits this model to hot/identity keys; the stored-key "savings/inheritance sovereignty mode" is superseded by the amnesic signer (Class 1)
 
 > **Storage primitive revised by ADR-0014:** since we moved to PWA-first, the age-encrypted key material is stored in IndexedDB (browser origin-isolated) rather than a filesystem path. The core model (age + Argon2id-derived recipient + optional session cache) is unchanged. The session cache uses WebAuthn/passkey in the browser instead of the `keyring` Rust crate's OS keystore API. Every semantic property in this ADR still applies; only the storage backend and biometric-access layer differ.
 

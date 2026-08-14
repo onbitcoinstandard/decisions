@@ -1,7 +1,7 @@
 # ADR-0016: Sub-app architecture — one focused PWA per wallet concept
 
 Date: 2026-04-16
-Status: Accepted (supplements ADR-0014 PWA-first shell) — amended 2026-04-16 to drop daily Arkade wallet sub-app; see § Amendment below
+Status: Accepted (supplements ADR-0014 PWA-first shell) — amended 2026-04-16 to drop daily Arkade wallet sub-app; see § Amendment below. consolidated by ADR-0022 — sub-apps become internal modules of one nsec-gated wallet; only signer keeps a separate origin
 
 ## Amendment 2026-04-16 — daily Arkade wallet dropped; signer-first priority
 

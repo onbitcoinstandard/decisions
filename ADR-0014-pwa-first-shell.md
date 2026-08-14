@@ -1,7 +1,7 @@
 # ADR-0014: PWA-first shell strategy
 
 Date: 2026-04-15
-Status: Accepted (supersedes ADR-0006) — store-abstinence amended by ADR-0019 (2026-08-14): PWA remains canonical, store/APK builds added as distribution overlays
+Status: Accepted (supersedes ADR-0006) — store-abstinence amended by ADR-0019; keys-object-store scoped by ADR-0020: Class 2/3 ciphertexts only, wallet is watch-only for cold funds
 
 ## Context
 
