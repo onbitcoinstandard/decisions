@@ -101,3 +101,12 @@ discipline" to an **OS-enforced air gap on any phone**, with zero flashing.
   the control. UX copy must keep the two claims distinct.
 - Verification: the reproducible-build hash plus a manifest dump
   (`aapt dump permissions`) lets anyone confirm the APK asks for nothing.
+
+## Amendment (2026-08-14, Rajesh): the signer is Android-only
+
+The signer ships natively on **Android only** — no iOS build, ever. The dedicated-
+device story depends on capabilities iOS structurally lacks: sideloading without a
+store, dropping the network permission at the OS level, and the Tier-2/3 ROM path.
+The signer PWA remains reachable from any browser as the try-it channel. The
+**wallet** (and other online apps) do ship iOS from the same web package — this
+amendment scopes only the signer.
