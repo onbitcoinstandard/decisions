@@ -83,3 +83,21 @@ bootloader is relocked under our key (Tier 3).
   offline device doesn't chase monthly patches; rebuilds track our releases, not Android's.
 - Spec §10 gains the ladder; §12 #3 is resolved; §17–§18 (install channel, physical
   adversary model) are added in Master v2.
+
+## Amendment (2026-08-14, Rajesh): Tier-1 APK declares no INTERNET permission
+
+The signer's Android APK (the Capacitor wrap of the PWA build) ships **without
+`android.permission.INTERNET` in its manifest — and without any other network
+permission.** Android enforces network access at the OS level per-app: an APK
+that never declares the permission cannot open a socket, on **any** device,
+stock or custom, rooted or not. This upgrades Tier 1 from "airplane-mode
+discipline" to an **OS-enforced air gap on any phone**, with zero flashing.
+
+- The wrap must not include plugins or WebView settings that require network;
+  the app loads exclusively from bundled local assets.
+- Applies to all native builds (Tier 1 APK, and the signer as baked into
+  Tier 2/3 images). The **browser PWA cannot make this claim** — a browser has
+  the internet permission; there the §18 rituals and the airplane gate remain
+  the control. UX copy must keep the two claims distinct.
+- Verification: the reproducible-build hash plus a manifest dump
+  (`aapt dump permissions`) lets anyone confirm the APK asks for nothing.
