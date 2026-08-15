@@ -110,3 +110,15 @@ store, dropping the network permission at the OS level, and the Tier-2/3 ROM pat
 The signer PWA remains reachable from any browser as the try-it channel. The
 **wallet** (and other online apps) do ship iOS from the same web package — this
 amendment scopes only the signer.
+
+## Amendment (2026-08-15, Rajesh): no hosted signer — APK-only distribution
+
+The hosted signer PWA is withdrawn. signer.onbitcoinstandard.com is a **landing
+page only** (what it is, release verification, card templates, APK download).
+Rationale: a signer running in an online browser invites exactly the behavior the
+product forbids — seed entry on a networked device. Distribution is the **signed
+APK** (and later Tier-2/3 images) exclusively; the web build remains in-repo for
+development and as the APK's source, but is never deployed as a runnable app.
+The PWA-canonical rule (ADR-0014) continues to apply to the online apps (wallet);
+this amendment scopes only the signer. A decommissioning service worker was
+deployed at the old /app/ scope to clear cached copies.
