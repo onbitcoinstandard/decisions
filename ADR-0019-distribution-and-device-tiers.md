@@ -122,3 +122,42 @@ development and as the APK's source, but is never deployed as a runnable app.
 The PWA-canonical rule (ADR-0014) continues to apply to the online apps (wallet);
 this amendment scopes only the signer. A decommissioning service worker was
 deployed at the old /app/ scope to clear cached copies.
+
+## Amendment (2026-08-18, Rajesh): Tier 3 = GrapheneOS, not a custom build; GSI scoped to cheap phones
+
+Two changes to the device-tier ladder, from the realisation that GrapheneOS already
+delivers Tier 3 better than we could build it — and only on Pixels.
+
+**Tier 3 is now GrapheneOS + the OBS Signer APK — we build no custom relocked image.**
+GrapheneOS (Pixel-only) is a maintained, hardened OS with verified boot + bootloader
+relocking under its own keys (hardware-enforced integrity) and a per-app network
+permission toggle that denies the app all network at the OS layer. The signer is just
+an Android app: flash GrapheneOS → install the OBS Signer APK → deny it network →
+airplane mode → relock. This is cleaner and more secure than a home-rolled per-device
+build, with zero build/maintenance burden. So the earlier "Tier 3 = full per-device
+build + custom AVB key + relock" plan is **withdrawn**; the recommendation is Graphene.
+Honest nuance: GrapheneOS keeps the radios physically present (neutralised by verified
+boot + no-network-permission + per-app denial + airplane), rather than stripping them
+from the build. For every realistic threat model that is sufficient; physical removal
+on a Pixel is diminishing returns.
+
+**Tier 2 (the de-radioed GSI) is now explicitly scoped to CHEAP commodity phones only.**
+GrapheneOS cannot run on non-Pixel hardware, and the whole OBS thesis is "a $20 old
+phone becomes an air-gapped signer." That accessible tier is exactly what the GSI serves
+and Graphene cannot. The GSI base is **pure AOSP (aosp_arm64), de-radioed** — minimal and
+auditable, deliberately NOT TrebleDroid (its hundreds of vendor-compat patches are audit/
+attack surface a signer shouldn't carry, and most of what they fix is the connectivity we
+delete). Validated against a **curated device shortlist** we QA ourselves (near-stock
+brands — Motorola G-series that unlock officially, Nothing/CMF), not "any phone." For a
+signer the only hardware needs are display, touch, and camera; on MediaTek/near-stock
+devices those are the parts that work. Tier-2 devices are unlocked-bootloader only
+(ritual-secured per spec §18), never relocked — relock lives in Tier 3 (Graphene/Pixel).
+
+**Resulting ladder:**
+| Tier | Base | Device | Integrity |
+|---|---|---|---|
+| 1 · Universal | no-network APK | any phone | software (OS denies the socket) |
+| 2 · Accessible | de-radioed pure-AOSP GSI | cheap unlockable (Moto G-official, Nothing/CMF) | OS-level; unlocked → ritual |
+| 3 · Hardware-enforced | **GrapheneOS + APK** | Pixel | verified boot + relock |
+
+Supersedes the Tier-3 rows of the original §3 table and the §3.4 flagship-build plan.
